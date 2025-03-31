@@ -1,0 +1,44 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Malice in Wonderland - Clue</title>
+  <style>
+    body { font-family: 'Georgia', serif; padding: 2rem; background: #f4f4f4; color: #333; }
+    .container { background: white; padding: 2rem; border-radius: 10px; max-width: 800px; margin: auto; box-shadow: 0 0 10px rgba(0,0,0,0.2); }
+    h1 { color: #a00; }
+    em { color: #555; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Malice in Wonderland</h1>
+    <div id="clue-content">Loading clue...</div>
+  </div>
+
+  <script>
+    const clues = {
+      intro: `<h2>Welcome to the Game</h2><p>The Red Queen’s Peace Ball has turned deadly. The March Hare has been murdered. His eyes are missing. The time is ticking, detectives.</p><p>You have 3 hours to uncover: <strong>Who killed the March Hare, How they did it, and Why.</strong></p><p>Start your investigation at the crime scene outside the ballroom.</p>`,
+      crime: `<h2>Crime Scene</h2><p>You arrive at the scene. The body has been removed, but what remains is chilling:</p><ul><li>A chalk outline where the Hare once lay.</li><li>Thick, brown stew-like goop splattered across his jacket.</li><li>A single bowler hat tossed in the corner, bloodied.</li><li>A torn note with a bloodstain and a QR code.</li></ul><p><em>The Cheshire Cat was nearby… perhaps they saw something.</em></p>`,
+      cheshire: `<h2>The Cheshire Cat</h2><p>“Tragic, isn’t it? Or thrilling?” the Cat grins. “I’ve seen many things… but I won’t tell you. Not directly.”</p><p><strong>Riddle:</strong></p><p><em>'The truth you seek is hiding still, Between the lines, beneath the thrill.<br> Bound in pages, fiction’s mask—To find the clue, complete the task.'</em></p><p>A hollowed-out book contains a napkin with scribbled writing accusing Alice.<br><strong>Note:</strong> R² (cipher hint)</p><p><em>Seek out Alice.</em></p>`,
+      alice: `<h2>Alice</h2><p>“I borrowed a hat for the evening—from Tweedle Dee, I think. But I checked it at the coat rack the moment I arrived,” Alice explains.</p><p>“I didn’t notice it missing until all of this... horror. I don’t know what’s happening. Maybe you’ll find a clue over there.”</p><p>You dig through the coat rack and find a receipt in a pocket…</p><p><strong>QR leads to: Mad Hatter.</strong></p>`,
+      hatter: `<h2>The Mad Hatter</h2><p>“Oh, the receipt? I made the Hare a hat just yesterday—sapphire ribbon and all.”</p><p>“That blood? Mine. Cut my finger sewing the tag. But the Hare was ranting about the Carpenter. Said he ruined his deck and was refusing payment.”</p><p>“He said—and I quote—‘I’m going to his house right after this to tell him off.’ That means the Walrus saw him next.”</p><p>“Also, during the Queen’s toast, he made some awful joke about oysters. I swear I heard her mutter: ‘Off with his head.’”</p><p><strong>Note:</strong> T⁸ (cipher hint)</p><p><em>Now… go speak to the Queen.</em></p>`,
+      queen: `<h2>The Red Queen</h2><p>“This evening has been a disaster! My food devoured, my royal carpenter absent, my rose garden disturbed—</p><p>I sent guards to his home. No answer. The Walrus claims not to have seen him in 3 days.”</p><p>“And someone was digging in the rose garden. The guards found a buried box, unopened.”</p><p><strong>Note:</strong> O⁵ (cipher hint)</p><p><em>Investigate the buried box.</em></p>`,
+      box: `<h2>The Buried Box</h2><p>Inside: a small folded note with spidery handwriting.</p><blockquote>“Curiosity may have led you here...<br>But it won’t help you sleep tonight.<br><br>I’ve been everywhere and nowhere—watching you chase ghosts through shadows.<br><br>The March Hare?<br>He didn’t deserve it.<br>He was just... a loose thread.<br><br>Loose threads unravel things.<br>And sometimes, those things are soft.<br>Delicate.<br>Squishy.<br>Salty.<br><br>This is becoming quite the rousing adventure, no?<br>Hopefully close enough that you find me before I find my next victim…”</blockquote><p><strong>Note:</strong> Y⁰ (cipher hint)</p><p><em>The White Rabbit waits nearby...</em></p>`,
+      rabbit: `<h2>The White Rabbit</h2><p>“I didn’t eat at the ball—it was all seafood. I'm a herbivore. Like the Hare.”</p><p>“I was eating apples in the garden when I saw the March Hare rush past. He was pale, terrified. Muttering—‘I must tell the Queen. His eyes… they were gone!’”</p><p>“Then I heard it. A scream. A crunch.”</p><p>“You’ve followed the clues. Time is running out.”</p><p><strong>Note:</strong> S³ (cipher hint)</p><p><strong>Time to answer: Who? How? Why?</strong></p>`,
+      victory: `<h2>Final Safe Unlocked</h2><p>You solved the cipher. The code was OYSTER → 503822</p><p>Inside the safe is the final note:</p><blockquote>“They say you are what you eat. But if you are nothing, how do you taste?<br><br>The Hare’s eyes were... delicate. Slippery. Perfect. Salty, just how I like them.<br>He saw too much. And now... he sees nothing at all.<br><br>Alice is safe. For now.”</blockquote><p><strong>Congratulations. You solved Malice in Wonderland.</strong></p>`
+    };
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const code = urlParams.get('code');
+
+    const contentDiv = document.getElementById("clue-content");
+    if (clues[code]) {
+      contentDiv.innerHTML = clues[code];
+    } else {
+      contentDiv.innerHTML = "<p>Invalid or missing clue. Please scan a valid QR code.</p>";
+    }
+  </script>
+</body>
+</html>
