@@ -1,0 +1,177 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Malice in Wonderland - Clue</title>
+  <style>
+    body {
+      font-family: 'Georgia', serif;
+      padding: 2rem;
+      background: #0f0f0f;
+      color: #e0e0e0;
+      line-height: 1.6;
+    }
+    .container {
+      background: #1e1e1e;
+      padding: 2rem;
+      border-radius: 10px;
+      max-width: 800px;
+      margin: auto;
+      box-shadow: 0 0 15px rgba(255, 0, 0, 0.2);
+    }
+    h1 {
+      color: #ff5555;
+      font-size: 2rem;
+      text-align: center;
+    }
+    h2 {
+      color: #ff9999;
+      margin-top: 1.5rem;
+    }
+    .screenshot-note {
+      background: #2a2a2a;
+      border-left: 4px solid #ff4444;
+      padding: 1em;
+      margin-bottom: 1em;
+      font-weight: bold;
+    }
+    blockquote {
+      border-left: 4px solid #666;
+      padding-left: 1em;
+      color: #ccc;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Malice in Wonderland</h1>
+    <div id="clue-content">Loading clue...</div>
+  </div>
+
+  <script>
+    const clues = {
+      intro: `
+        <div class="screenshot-note">Take a screenshot of this page to use as reference throughout your investigation!</div>
+        <h2>Welcome to Wonderland</h2>
+        <p>The Red Queen has thrown a rare and elaborate peace ball at the palace. But peace is fleeting—before the evening can reach its crescendo, a scream tears through the air.</p>
+        <p>Guests discover the March Hare's body just beyond the Grand Hall. His eyes are missing. A thick, brown, gravy-like substance clings to his clothes—an oddity for a known vegetarian.</p>
+        <p>A bloodstained letter lies nearby, along with a discarded bowler hat and signs of a struggle.</p>
+        <p>The Queen demands answers. You are the investigators.</p>
+        <p>Your first task: Investigate the crime scene.</p>
+      `,
+
+      crime: `
+        <div class="screenshot-note">Take a screenshot of this page to use as reference throughout your investigation!</div>
+        <h2>The Crime Scene</h2>
+        <p>You examine the cobblestone where the March Hare fell. Blood has sprayed across the stones in a fan-like pattern. A bowler hat—unusual for the Hare—sits in a corner.</p>
+        <p>The thick, brown substance on the Hare’s shirt appears to have soaked through his vest. It smells faintly of stew… meat stew.</p>
+        <p>Near the outline of his body lies a blood-stained note folded in half. Inside, there’s no message—just a scrawled letter, and a faint marking: R²</p>
+        <p>You consider who might be watching, and recall the one who’s everywhere and nowhere. The Cheshire Cat may have seen something.</p>
+      `,
+
+      cheshire: `
+        <div class="screenshot-note">Take a screenshot of this page to use as reference throughout your investigation!</div>
+        <h2>The Cheshire Cat</h2>
+        <p>You find the Cheshire Cat curled across the rafters, his grin stretching impossibly wide. He chuckles softly as you approach.</p>
+        <blockquote>"Ahhh, my favorite guests. Always chasing tails, aren't we? Well, well… the game’s afoot. Or a paw. Or a tail."</blockquote>
+        <p>He speaks in riddles, offering you a challenge rather than a confession.</p>
+        <blockquote>
+        “The truth you seek is hiding still,<br>
+        Between the lines, beneath the thrill.<br>
+        Bound in pages, fiction’s mask—<br>
+        To find the clue, complete the task.”
+        </blockquote>
+        <p>You spot a weathered book nearby, its spine worn and title nearly faded. Hidden inside is a napkin with a note, hinting that Alice borrowed a hat matching the one found at the scene.</p>
+        <p>The napkin also contains a small cipher: E²</p>
+        <p>Time to find Alice and ask some pointed questions.</p>
+      `,
+
+      alice: `
+        <div class="screenshot-note">Take a screenshot of this page to use as reference throughout your investigation!</div>
+        <h2>Alice</h2>
+        <p>You find Alice near the garden wall, her face pale but composed. She straightens her dress as you approach.</p>
+        <blockquote>"Me? No. I would never hurt him. The March Hare and I—we’ve always been friends."</blockquote>
+        <p>You question her about the hat. She sighs.</p>
+        <blockquote>"I borrowed one of Tweedle Dee’s hats for the night. Checked it at the coat rack when I arrived. So many coats, I have no idea where it went."</blockquote>
+        <p>She gestures toward the Grand Hall’s coat check. "You want answers? Maybe you should go digging instead of pointing fingers."</p>
+        <p>Inside a coat pocket you find a digital receipt—blood-stained—listing a purchase from the Mad Hatter.</p>
+        <p>The bottom corner shows: T⁸</p>
+      `,
+
+      hatter: `
+        <div class="screenshot-note">Take a screenshot of this page to use as reference throughout your investigation!</div>
+        <h2>The Mad Hatter</h2>
+        <p>The Hatter adjusts his goggles and welcomes you with a crooked smile.</p>
+        <blockquote>"Ah, yes, that receipt. I made the Hare a new hat just yesterday. Sapphire ribbon, hand-stitched."</blockquote>
+        <p>You question the blood.</p>
+        <blockquote>"Mine, I’m afraid. Pricked my finger. Adds character, don’t you think?"</blockquote>
+        <p>He grows serious.</p>
+        <blockquote>"The Hare was furious. Said the Carpenter ruined his new deck and tried to demand payment. He told him off and said, ‘I’m going to his house right after this.’ That means he visited the house he shares with the Walrus."</blockquote>
+        <p>"Oh, and during the Queen’s toast? The Hare cracked a joke about shellfish. I saw her jaw tighten… and I swear I heard her whisper, ‘Off with his head.’"</p>
+        <p>The cipher: O⁵</p>
+      `,
+
+      queen: `
+        <div class="screenshot-note">Take a screenshot of this page to use as reference throughout your investigation!</div>
+        <h2>The Queen of Hearts</h2>
+        <p>You find the Queen pacing, livid.</p>
+        <blockquote>"This entire evening has been a disaster. The food vanished before guests arrived. Someone’s been digging in my rose bushes. And now—murder."</blockquote>
+        <p>She snarls, then composes herself.</p>
+        <blockquote>"I had invited the Royal Carpenter to dine at my table. He never arrived. I sent guards to his home. No answer. The Walrus answered later—said he hadn’t seen him in three days."</blockquote>
+        <p>She scoffs. "I ordered a search of the rose garden. They found something... buried."</p>
+        <p>Time to investigate. The cipher found earlier: Y⁰</p>
+      `,
+
+      box: `
+        <div class="screenshot-note">Take a screenshot of this page to use as reference throughout your investigation!</div>
+        <h2>The Buried Box</h2>
+        <p>You dig through the soil until your fingers strike a metal box. Inside, a final message waits, handwritten and stained with something dark.</p>
+        <blockquote>
+        “Curiosity may have led you here...<br>
+        But it won’t help you sleep tonight.”<br><br>
+        I’ve been everywhere and nowhere—watching you chase ghosts through shadows.<br><br>
+        The March Hare?<br>
+        He didn’t deserve it.<br>
+        He was just... a loose thread.<br><br>
+        Loose threads unravel things.<br>
+        And sometimes, those things are soft.<br><br>
+        Delicate.<br>
+        Squishy.<br>
+        Salty.<br><br>
+        This is becoming quite the rousing adventure, no?<br>
+        How close are you to solving my puzzles?<br>
+        Hopefully close enough that you find me...<br>
+        before I find my next victim.”
+        </blockquote>
+        <p>The note contains: S³</p>
+        <p>One last stop: the White Rabbit.</p>
+      `,
+
+      rabbit: `
+        <div class="screenshot-note">Take a screenshot of this page to use as reference throughout your investigation!</div>
+        <h2>The White Rabbit</h2>
+        <p>You approach the White Rabbit, who is nervously stamping his foot just outside the doors of the Grand Hall and checking his pocket watch. He looks over at you and says,</p>
+        <blockquote>"Finally! You're late. I was expecting you to come and speak to me much earlier in your investigation! What do you need?!"</blockquote>
+        <p>You ask him a series of questions about his whereabouts during the evening and things he may have seen. He states the following:</p>
+        <blockquote>
+        “For the majority of the night, I was out in the garden. The air was thick with the smell of fish and shrimp and oysters and it turned my stomach, you see, because I'm a herbivore. Like the Hare. So I came out to the garden and I was talking with Alice and eating apples in the garden. She went back inside when I saw the March Hare rush past on the other side of the garden. He was pale, terrified. I could hear him nearly shrieking—‘I must tell the Queen. The poor Carpenter, his eyes… they were gone!’<...
+        I had no idea what that meant, and it was shortly after that I heard it. A scream. A crunch. Like twigs snapping.”
+        </blockquote>
+        <p>Time to solve it: Who killed the Hare? How? Why?</p>
+        <p>The cipher is now complete. Arrange the superscripted letters by spelling OYSTER. The digits beside them reveal the safe code.</p>
+      `
+    };
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const code = urlParams.get('code');
+
+    const contentDiv = document.getElementById("clue-content");
+    if (clues[code]) {
+      contentDiv.innerHTML = clues[code];
+    } else {
+      contentDiv.innerHTML = "<p>Invalid or missing clue. Please scan a valid QR code.</p>";
+    }
+  </script>
+</body>
+</html>
